@@ -30,5 +30,9 @@ variable "vpc_network" {
   type        = string
   description = "Enter the VPC name"
 }
+variable "tags" {
+  type        = string
+  description = "Enter the VPC name"
+}
 
 
