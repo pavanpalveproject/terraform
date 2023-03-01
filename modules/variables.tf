@@ -31,10 +31,4 @@ variable "vpc_network" {
   description = "Enter the VPC name"
 }
 
-variable "scope" {
-  type = string
-}
-variable "tags" {
-  type = string
-}
 
