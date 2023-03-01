@@ -19,7 +19,7 @@ module "compute_engine" {
   region                    = "us-central1"
   zone                      = "us-central1-c"
   vpc_network               = "default"
-  machine                   = "f1-micro"
+  machine                   = var.machine
   tags                      = "dev-server"
   disk_image                = "debian-cloud/debian-11"
 }
