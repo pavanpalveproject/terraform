@@ -13,13 +13,13 @@ provider "google" {
 }
 
 module "compute_engine" {
-  source                    = "./modules"
-  project_id                = var.project_id
-  name                      = var.name
-  region                    = var.region
-  zone                      = var.zone
-  vpc_network               = var.vpc_network
-  machine                   = var.machine
-  tags                      = var.tags
-  disk_image                = var.disk_image
+  source                    = "../../modules"
+  project_id                = "0-media-2"
+  name                      = "dev-vm"
+  region                    = "us-central1"
+  zone                      = "us-central1-c"
+  vpc_network               = "default"
+  machine                   = "f1-micro"
+  tags                      = "dev-server"
+  disk_image                = "debian-cloud/debian-11"
 }
