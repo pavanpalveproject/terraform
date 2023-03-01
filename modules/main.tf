@@ -1,42 +1,26 @@
-terraform {
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-    }
-  }
-}
-
-# provider "google" {
-#   credentials = file("/home/pavan_palve_project/o-media-2-59c02dc0d3cb.json")       #not_used
-#   # credentials = $GOOGLE_APPLICATION_CREDENTIALS
-#   project     = "o-media-2"
-#   region      = "asia-south1"
-# }
-
-resource "google_compute_instance" "my-cicd-vm" {
-  name         = "cicd-vms"
-  machine_type = "e2-small"
-  project = "o-media-2"
-  zone     = "asia-south1-a"
-
-  tags = ["allow-firewall"]
+resource "google_compute_instance" "vm" {
+  name                      = var.name
+  machine_type              = var.machine
+  zone                      = var.zone
+  tags                      = [var.tags]
+  allow_stopping_for_update = var.allow_stopping_for_update
+  deletion_protection       = var.deletion_protection
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-11"
-      labels = {
-        my_label = "value"
-      }
+      image = var.disk_image
     }
   }
 
- 
-
   network_interface {
-    network = "default"
-
- 
-
+    network = var.vpc_network
   }
-  allow_stopping_for_update = true
+
+ // scratch_disk {
+   // interface = var.scratch_disk
+  //}
+  service_account {
+    email  = google_service_account.default.email
+    scopes = [var.scope]
+  }
 }
