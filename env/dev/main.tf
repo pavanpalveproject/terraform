@@ -15,7 +15,7 @@ provider "google" {
 module "compute_engine" {
   source                    = "../../modules"
   project_id                = "0-media-2"
-  name                      = "dev-vm"
+  name                      = var.name
   region                    = "us-central1"
   zone                      = "us-central1-c"
   vpc_network               = "default"

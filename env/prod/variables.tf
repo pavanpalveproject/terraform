@@ -7,7 +7,7 @@ variable "project_id" {
 variable "name" {
 
   type        = string
-  default = "dev_vm"
+  default = "prod_vm"
 }
 
 variable "region" {
@@ -31,13 +31,13 @@ variable "vpc_network" {
 variable "machine" {
   
   type        = string
-  default = "e2-micro"
+  default = "f1-micro"
 }
 
 variable "tags" {
   
   type        = string
-  default = "dev_server"
+  default = "prod_server"
 }
 
 variable "disk_image" {
