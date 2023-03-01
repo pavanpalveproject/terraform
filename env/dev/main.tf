@@ -13,7 +13,7 @@ provider "google" {
 }
 
 module "compute_engine" {
-  source                    = "./modules"
+  source                    = "../modules"
   project_id                = var.project_id
   name                      = var.name
   region                    = var.region
