@@ -24,10 +24,10 @@ module "compute_engine" {
   disk_image                = "debian-cloud/debian-11"
 }
 
-module "vpc_network2"{
-    source = "git::https://github.com/maniksde/TerraformModule.git"
-    project = "o-media-2"
-    region = "us-central1"
-    vpc_network = "o-media-2-vpc"
-    auto_create_subnetworks = false
-}
+# module "vpc_network2"{
+#     source = "git::https://github.com/maniksde/TerraformModule.git"
+#     project = "o-media-2"
+#     region = "us-central1"
+#     vpc_network = "o-media-2-vpc"
+#     auto_create_subnetworks = false
+# }
