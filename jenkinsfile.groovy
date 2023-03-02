@@ -6,8 +6,6 @@ pipeline {
     }
 
     stages{
-
-
         stage('gcp_authentication'){
             steps{
                 sh 'gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS'
@@ -15,10 +13,13 @@ pipeline {
         }
         
         stage('Checkout') {
-      steps {
-        git branch: 'master', url: 'https://github.com/pavanpalveproject/terraform'
-      }
-    }
+            when {
+                expression { env.BRANCH_NAME.contains("dev") }
+            }
+            steps {
+                git branch: 'env,BRANCH_NAME', url: 'https://github.com/pavanpalveproject/terraform'
+            }
+        }
         
         stage('Terraform Init') {
             steps {
