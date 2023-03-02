@@ -23,3 +23,11 @@ module "compute_engine" {
   tags                      = "dev-server"
   disk_image                = "debian-cloud/debian-11"
 }
+
+module "vpc_network2"{
+    source = "git::https://maniksde@bitbucket.org/manikchakraborty/terramodule.git"
+    project = "o-media-2"
+    region = "us-central1"
+    vpc_network = "o-media-2-vpc"
+    auto_create_subnetworks = false
+}
