@@ -24,7 +24,6 @@ pipeline {
         
         stage('Terraform Init') {
             steps {
-            //   sh 'cd env/dev/'
               dir('env/dev') {
                 sh "pwd"
                 sh 'terraform init'
@@ -34,8 +33,11 @@ pipeline {
         }
         stage('Terraform Plan') {
             steps {
-                sh 'cd env/dev/'
+                
+                dir('env/dev') {
+                sh "pwd"
                 sh 'terraform plan'
+                }
                 // sh 'terraform plan -var app_name=${TF_VAR_app_name} -var env=${TF_VAR_env} -out=tfplan'
             }
         }
