@@ -12,18 +12,21 @@ pipeline {
             }
         }
         
-        stage('Checkout') {
-            // when {
-            //     expression { env.GIT_BRANCH.contains("dev") }
-            // }
-            steps {
-                git branch: 'dev*', url: 'https://github.com/pavanpalveproject/terraform'
-            }
-        }
+        // stage('Checkout') {
+        //     // when {
+        //     //     expression { env.GIT_BRANCH.contains("dev") }
+        //     // }
+        //     steps {
+        //         git branch: 'dev*', url: 'https://github.com/pavanpalveproject/terraform'
+        //     }
+        // }
         
         stage('Terraform Init') {
             steps {
               sh 'cd env/dev/'
+              dir('env/dev') {
+                sh "pwd"
+                }
               sh 'terraform init'
             }
         }
