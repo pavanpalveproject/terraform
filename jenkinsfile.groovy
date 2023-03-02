@@ -27,8 +27,9 @@ pipeline {
             //   sh 'cd env/dev/'
               dir('env/dev') {
                 sh "pwd"
+                sh 'terraform init'
                 }
-              sh 'terraform init'
+              
             }
         }
         stage('Terraform Plan') {
