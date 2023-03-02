@@ -14,10 +14,10 @@ pipeline {
         
         stage('Checkout') {
             when {
-                expression { env.BRANCH_NAME.contains("dev") }
+                expression { env.GIT_BRANCH.contains("dev") }
             }
             steps {
-                git branch: env.BRANCH_NAME, url: 'https://github.com/pavanpalveproject/terraform'
+                git branch: env.GIT_BRANCH, url: 'https://github.com/pavanpalveproject/terraform'
             }
         }
         
