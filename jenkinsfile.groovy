@@ -13,11 +13,11 @@ pipeline {
         }
         
         stage('Checkout') {
-            when {
-                expression { env.GIT_BRANCH.contains("dev") }
-            }
+            // when {
+            //     expression { env.GIT_BRANCH.contains("dev") }
+            // }
             steps {
-                git branch: env.GIT_BRANCH, url: 'https://github.com/pavanpalveproject/terraform'
+                git branch: 'dev*', url: 'https://github.com/pavanpalveproject/terraform'
             }
         }
         
