@@ -24,7 +24,7 @@ pipeline {
         
         stage('Terraform Init') {
             steps {
-              sh 'cd env/dev/'
+            //   sh 'cd env/dev/'
               dir('env/dev') {
                 sh "pwd"
                 }
