@@ -17,7 +17,7 @@ pipeline {
                 expression { env.BRANCH_NAME.contains("dev") }
             }
             steps {
-                git branch: 'env,BRANCH_NAME', url: 'https://github.com/pavanpalveproject/terraform'
+                git branch: env.BRANCH_NAME, url: 'https://github.com/pavanpalveproject/terraform'
             }
         }
         
