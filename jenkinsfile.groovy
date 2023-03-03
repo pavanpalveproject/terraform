@@ -91,13 +91,13 @@ pipeline {
           if (env.BRANCH_NAME.contains("qa")) {
             dir('env/qa') {
               sh "pwd"
-              // sh 'terraform apply -auto-approve terraform.plan'
+              sh 'terraform apply -auto-approve terraform.plan'
             }
           }
           if (env.BRANCH_NAME.contains("prod")) {
             dir('env/prod') {
               sh "pwd"
-              // sh 'terraform apply -auto-approve terraform.plan'
+              sh 'terraform apply -auto-approve terraform.plan'
             }
           }
         }
