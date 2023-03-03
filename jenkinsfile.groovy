@@ -6,13 +6,13 @@ pipeline {
     }
 
     if(env.BRANCH_NAME.contains('dev')){
-        env_ = dev
+       def  env_ = dev
     }
     if(env.BRANCH_NAME.contains("qa")){
-        env_ = qa
+       def  env_ = qa
     }
     if(env.BRANCH_NAME.contains("prod")){
-        env_ = prod
+       def env_ = prod
     }
     
 
