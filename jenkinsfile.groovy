@@ -54,7 +54,7 @@ pipeline {
             dir('env/dev') {
               sh "pwd"
               sh 'terraform plan'
-              sh 'terraform apply'
+              // sh 'terraform apply'
             }
           }
           if (env.BRANCH_NAME.contains("qa")) {
@@ -71,6 +71,11 @@ pipeline {
           }
         }
 
+      }
+    }
+    stage('Approval'){
+      steps{
+        input message : 'are you sure to merge', ok: 'Approve'
       }
     }
     // stage('Terraform Plan') {

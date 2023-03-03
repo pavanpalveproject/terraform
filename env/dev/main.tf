@@ -24,16 +24,16 @@ module "compute_engine" {
   disk_image                = "debian-cloud/debian-11"
 }
 
-module "vpc_network"{
+# module "vpc_network"{
 
-    source = "git::https://github.com/maniksde/TerraformModule.git"
+#     source = "git::https://github.com/maniksde/TerraformModule.git"
 
-    project = "o-media-practice"
+#     project = "o-media-practice"
 
-    region = "us-central1"
+#     region = "us-central1"
 
-    vpc_network = "manik-repo-practice-vpc"
+#     vpc_network = "manik-repo-practice-vpc"
 
-    auto_create_subnetworks = false
+#     auto_create_subnetworks = false
 
-}
+# }
