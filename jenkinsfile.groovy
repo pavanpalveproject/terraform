@@ -44,10 +44,6 @@ pipeline {
             }
           }
         }
-        //   dir('env/${env_}') {
-        //     sh "pwd"
-        //     sh 'terraform init'
-        //     }
 
       }
     }
