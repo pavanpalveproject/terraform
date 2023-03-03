@@ -12,7 +12,6 @@ pipeline {
       }
     }
 
-
     // stage('Checkout') {
     //     // when {
     //     //     expression { env.GIT_BRANCH.contains("dev") }
