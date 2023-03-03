@@ -45,7 +45,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 
-                dir('env/${env_}'') {
+                dir('env/${env_}') {
                 sh "pwd"
                 sh 'terraform plan'
                 sh 'terraform plan -var app_name=${TF_VAR_app_name} -var env=${TF_VAR_env} -out=tfplan'
