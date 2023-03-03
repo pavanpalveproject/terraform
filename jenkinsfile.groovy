@@ -86,7 +86,6 @@ pipeline {
             dir('env/dev') {
               sh "pwd"
               // sh 'terraform apply -auto-approve terraform.plan'
-              // sh 'terraform apply'
             }
           }
           if (env.BRANCH_NAME.contains("qa")) {
