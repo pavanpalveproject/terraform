@@ -53,23 +53,71 @@ pipeline {
           if (env.BRANCH_NAME.contains('dev')) {
             dir('env/dev') {
               sh "pwd"
-              sh 'terraform plan'
+              sh 'terraform plan -out=terraform.plan'
+              // sh 'terraform apply'
             }
           }
           if (env.BRANCH_NAME.contains("qa")) {
             dir('env/qa') {
               sh "pwd"
-              sh 'terraform plan'
+              sh 'terraform plan -out=terraform.plan'
             }
           }
           if (env.BRANCH_NAME.contains("prod")) {
             dir('env/prod') {
               sh "pwd"
-              sh 'terraform plan'
+              sh 'terraform plan -out=terraform.plan'
             }
           }
         }
 
+      }
+    }
+    stage('Approval'){
+      steps{
+        input message : 'are you sure to apply changes', ok: 'Approve'
+      }
+    }
+
+    stage('Terraform Apply') {
+      steps {
+        script {
+          if (env.BRANCH_NAME.contains('dev')) {
+            dir('env/dev') {
+              sh "pwd"
+              // sh 'terraform apply -auto-approve terraform.plan'
+            }
+          }
+          if (env.BRANCH_NAME.contains("qa")) {
+            dir('env/qa') {
+              sh "pwd"
+              // sh 'terraform apply -auto-approve terraform.plan'
+            }
+          }
+          if (env.BRANCH_NAME.contains("prod")) {
+            dir('env/prod') {
+              sh "pwd"
+              // sh 'terraform apply -auto-approve terraform.plan'
+            }
+          }
+        }
+
+      }
+    }
+
+    stage('Merge'){
+      steps{
+        script {
+          if (env.BRANCH_NAME.contains('dev')) {
+            sh 'git checkout master && git merge origin/${BRANCH_NAME} && git push'
+          }
+          if (env.BRANCH_NAME.contains("qa")) {
+            sh 'git checkout master && git merge ${BRANCH_NAME} && git push'
+          }
+          if (env.BRANCH_NAME.contains("prod")) {
+            sh 'git checkout master && git merge ${BRANCH_NAME} && git push'
+          }
+        }
       }
     }
     // stage('Terraform Plan') {

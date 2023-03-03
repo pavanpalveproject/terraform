@@ -7,7 +7,7 @@ variable "project_id" {
 variable "name" {
 
   type        = string
-  default = "prod_vm"
+  default = "prod-vm"
 }
 
 variable "region" {
@@ -37,7 +37,7 @@ variable "machine" {
 variable "tags" {
   
   type        = string
-  default = "prod_server"
+  default = "prod-server"
 }
 
 variable "disk_image" {

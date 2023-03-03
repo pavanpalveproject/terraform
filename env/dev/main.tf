@@ -14,7 +14,7 @@
 
 module "compute_engine" {
   source                    = "../../modules"
-  project_id                = "0-media-2"
+  project_id                = "o-media-2"
   name                      = var.name
   region                    = "us-central1"
   zone                      = "us-central1-c"
@@ -24,10 +24,16 @@ module "compute_engine" {
   disk_image                = "debian-cloud/debian-11"
 }
 
-# module "vpc_network2"{
+# module "vpc_network"{
+
 #     source = "git::https://github.com/maniksde/TerraformModule.git"
-#     project = "o-media-2"
+
+#     project = "o-media-practice"
+
 #     region = "us-central1"
-#     vpc_network = "o-media-2-vpc"
+
+#     vpc_network = "manik-repo-practice-vpc"
+
 #     auto_create_subnetworks = false
+
 # }
