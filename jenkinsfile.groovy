@@ -5,6 +5,17 @@ pipeline {
         CLOUDSDK_CORE_PROJECT = 'o-media-2'
     }
 
+    if(env.BRANCH_NAME.contains("dev")){
+        env_ = dev
+    }
+    if(env.BRANCH_NAME.contains("qa")){
+        env_ = qa
+    }
+    if(env.BRANCH_NAME.contains("prod")){
+        env_ = prod
+    }
+    
+
     stages{
         stage('gcp_authentication'){
             steps{
@@ -24,7 +35,7 @@ pipeline {
         
         stage('Terraform Init') {
             steps {
-              dir('env/dev') {
+              dir('env/${env_}') {
                 sh "pwd"
                 sh 'terraform init'
                 }
@@ -34,11 +45,12 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 
-                dir('env/dev') {
+                dir('env/${env_}'') {
                 sh "pwd"
                 sh 'terraform plan'
+                sh 'terraform plan -var app_name=${TF_VAR_app_name} -var env=${TF_VAR_env} -out=tfplan'
                 }
-                // sh 'terraform plan -var app_name=${TF_VAR_app_name} -var env=${TF_VAR_env} -out=tfplan'
+                
             }
         }
     }
