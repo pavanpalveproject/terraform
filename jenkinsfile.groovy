@@ -53,20 +53,20 @@ pipeline {
           if (env.BRANCH_NAME.contains('dev')) {
             dir('env/dev') {
               sh "pwd"
-              sh 'terraform plan'
+              sh 'terraform plan -out=terraform.plan'
               // sh 'terraform apply'
             }
           }
           if (env.BRANCH_NAME.contains("qa")) {
             dir('env/qa') {
               sh "pwd"
-              sh 'terraform plan'
+              sh 'terraform plan -out=terraform.plan'
             }
           }
           if (env.BRANCH_NAME.contains("prod")) {
             dir('env/prod') {
               sh "pwd"
-              sh 'terraform plan'
+              sh 'terraform plan -out=terraform.plan'
             }
           }
         }
@@ -75,7 +75,7 @@ pipeline {
     }
     stage('Approval'){
       steps{
-        input message : 'are you sure to merge', ok: 'Approve'
+        input message : 'are you sure to apply changes', ok: 'Approve'
       }
     }
 
@@ -85,20 +85,20 @@ pipeline {
           if (env.BRANCH_NAME.contains('dev')) {
             dir('env/dev') {
               sh "pwd"
-              sh 'terraform apply'
+              sh 'terraform apply -auto-approve terraform.plan'
               // sh 'terraform apply'
             }
           }
           if (env.BRANCH_NAME.contains("qa")) {
             dir('env/qa') {
               sh "pwd"
-              sh 'terraform apply'
+              sh 'terraform apply -auto-approve terraform.plan'
             }
           }
           if (env.BRANCH_NAME.contains("prod")) {
             dir('env/prod') {
               sh "pwd"
-              sh 'terraform apply'
+              sh 'terraform apply -auto-approve terraform.plan'
             }
           }
         }
