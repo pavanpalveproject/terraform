@@ -5,15 +5,7 @@ pipeline {
         CLOUDSDK_CORE_PROJECT = 'o-media-2'
     }
 
-    if(env.BRANCH_NAME.contains('dev')){
-       def  env_ = dev
-    }
-    if(env.BRANCH_NAME.contains("qa")){
-       def  env_ = qa
-    }
-    if(env.BRANCH_NAME.contains("prod")){
-       def env_ = prod
-    }
+    
     
 
     stages{
@@ -35,6 +27,16 @@ pipeline {
         
         stage('Terraform Init') {
             steps {
+
+            if(env.BRANCH_NAME.contains('dev')){
+       def  env_ = dev
+    }
+    if(env.BRANCH_NAME.contains("qa")){
+       def  env_ = qa
+    }
+    if(env.BRANCH_NAME.contains("prod")){
+       def env_ = prod
+    }
               dir('env/${env_}') {
                 sh "pwd"
                 sh 'terraform init'
