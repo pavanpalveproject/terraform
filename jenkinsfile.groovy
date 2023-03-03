@@ -5,7 +5,7 @@ pipeline {
         CLOUDSDK_CORE_PROJECT = 'o-media-2'
     }
 
-    if(env.BRANCH_NAME.contains("dev")){
+    if(env.BRANCH_NAME.contains('dev')){
         env_ = dev
     }
     if(env.BRANCH_NAME.contains("qa")){
