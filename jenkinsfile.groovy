@@ -14,7 +14,7 @@ pipeline {
     if(env.BRANCH_NAME.contains("prod")){
         env_ = prod
     }
-    
+
 
     stages{
         stage('gcp_authentication'){
