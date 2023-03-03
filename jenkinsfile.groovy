@@ -78,6 +78,49 @@ pipeline {
         input message : 'are you sure to merge', ok: 'Approve'
       }
     }
+
+    stage('Terraform Apply') {
+      steps {
+        script {
+          if (env.BRANCH_NAME.contains('dev')) {
+            dir('env/dev') {
+              sh "pwd"
+              sh 'terraform apply'
+              // sh 'terraform apply'
+            }
+          }
+          if (env.BRANCH_NAME.contains("qa")) {
+            dir('env/qa') {
+              sh "pwd"
+              sh 'terraform apply'
+            }
+          }
+          if (env.BRANCH_NAME.contains("prod")) {
+            dir('env/prod') {
+              sh "pwd"
+              sh 'terraform apply'
+            }
+          }
+        }
+
+      }
+    }
+
+    stage('Merge'){
+      steps{
+        script {
+          if (env.BRANCH_NAME.contains('dev')) {
+            sh 'git checkout master && git merge ${BRANCH_NAME} && git push'
+          }
+          if (env.BRANCH_NAME.contains("qa")) {
+            sh 'git checkout master && git merge ${BRANCH_NAME} && git push'
+          }
+          if (env.BRANCH_NAME.contains("prod")) {
+            sh 'git checkout master && git merge ${BRANCH_NAME} && git push'
+          }
+        }
+      }
+    }
     // stage('Terraform Plan') {
     //     steps {
 
