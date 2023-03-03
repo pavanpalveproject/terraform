@@ -14,7 +14,7 @@ provider "google" {
 
 module "compute_engine" {
   source                    = "../../modules"
-  project_id                = "0-media-2"
+  project_id                = "o-media-2"
   name                      = var.name
   region                    = "us-central1"
   zone                      = "us-central1-c"
