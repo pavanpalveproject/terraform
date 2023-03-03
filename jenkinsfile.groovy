@@ -29,32 +29,41 @@ pipeline {
             steps {
             script{
             if(env.BRANCH_NAME.contains('dev')){
-       def  env_ = dev
-    }
-    if(env.BRANCH_NAME.contains("qa")){
-       def  env_ = qa
-    }
-    if(env.BRANCH_NAME.contains("prod")){
-       def env_ = prod
-    }
-            }
-              dir('env/${env_}') {
+       dir('env/dev') {
                 sh "pwd"
                 sh 'terraform init'
                 }
+    }
+    if(env.BRANCH_NAME.contains("qa")){
+       dir('env/qa') {
+                sh "pwd"
+                sh 'terraform init'
+                }
+    }
+    if(env.BRANCH_NAME.contains("prod")){
+      dir('env/prod') {
+                sh "pwd"
+                sh 'terraform init'
+                }
+    }
+            }
+            //   dir('env/${env_}') {
+            //     sh "pwd"
+            //     sh 'terraform init'
+            //     }
               
             }
         }
-        stage('Terraform Plan') {
-            steps {
+        // stage('Terraform Plan') {
+        //     steps {
                 
-                dir('env/${env_}') {
-                sh "pwd"
-                sh 'terraform plan'
-                sh 'terraform plan -var app_name=${TF_VAR_app_name} -var env=${TF_VAR_env} -out=tfplan'
-                }
+        //         dir('env/${env_}') {
+        //         sh "pwd"
+        //         sh 'terraform plan'
+        //         sh 'terraform plan -var app_name=${TF_VAR_app_name} -var env=${TF_VAR_env} -out=tfplan'
+        //         }
                 
-            }
-        }
+        //     }
+        // }
     }
 }
