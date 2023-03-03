@@ -54,6 +54,7 @@ pipeline {
             dir('env/dev') {
               sh "pwd"
               sh 'terraform plan'
+              sh 'terraform apply'
             }
           }
           if (env.BRANCH_NAME.contains("qa")) {
