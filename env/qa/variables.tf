@@ -7,7 +7,7 @@ variable "project_id" {
 variable "name" {
 
   type        = string
-  default = "qa_vm"
+  default = "qa-vm"
 }
 
 variable "region" {
@@ -37,7 +37,7 @@ variable "machine" {
 variable "tags" {
   
   type        = string
-  default = "qa_server"
+  default = "qa-server"
 }
 
 variable "disk_image" {
