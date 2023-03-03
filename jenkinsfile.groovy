@@ -12,7 +12,6 @@ pipeline {
       }
     }
 
-
     // stage('Checkout') {
     //     // when {
     //     //     expression { env.GIT_BRANCH.contains("dev") }
@@ -41,6 +40,32 @@ pipeline {
             dir('env/prod') {
               sh "pwd"
               sh 'terraform init'
+            }
+          }
+        }
+
+      }
+    }
+
+    stage('Terraform Plan') {
+      steps {
+        script {
+          if (env.BRANCH_NAME.contains('dev')) {
+            dir('env/dev') {
+              sh "pwd"
+              sh 'terraform plan'
+            }
+          }
+          if (env.BRANCH_NAME.contains("qa")) {
+            dir('env/qa') {
+              sh "pwd"
+              sh 'terraform plan'
+            }
+          }
+          if (env.BRANCH_NAME.contains("prod")) {
+            dir('env/prod') {
+              sh "pwd"
+              sh 'terraform plan'
             }
           }
         }
