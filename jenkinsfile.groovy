@@ -46,6 +46,32 @@ pipeline {
 
       }
     }
+
+    stage('Terraform Plan') {
+      steps {
+        script {
+          if (env.BRANCH_NAME.contains('dev')) {
+            dir('env/dev') {
+              sh "pwd"
+              sh 'terraform plan'
+            }
+          }
+          if (env.BRANCH_NAME.contains("qa")) {
+            dir('env/qa') {
+              sh "pwd"
+              sh 'terraform plan'
+            }
+          }
+          if (env.BRANCH_NAME.contains("prod")) {
+            dir('env/prod') {
+              sh "pwd"
+              sh 'terraform plan'
+            }
+          }
+        }
+
+      }
+    }
     // stage('Terraform Plan') {
     //     steps {
 
