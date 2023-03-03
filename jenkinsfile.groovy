@@ -27,7 +27,7 @@ pipeline {
         
         stage('Terraform Init') {
             steps {
-
+            script{
             if(env.BRANCH_NAME.contains('dev')){
        def  env_ = dev
     }
@@ -37,6 +37,7 @@ pipeline {
     if(env.BRANCH_NAME.contains("prod")){
        def env_ = prod
     }
+            }
               dir('env/${env_}') {
                 sh "pwd"
                 sh 'terraform init'
