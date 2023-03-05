@@ -99,7 +99,7 @@ pipeline {
       steps {
         script {
           // Replace this with your own approval mechanism
-          def approvedUser = 'johndoe'
+          def approvedUser = 'pavan'
           if (approvedUser in env.CHANGE_AUTHOR_DISPLAY_NAME) {
             input "Do you approve the changes for ${env.BRANCH_NAME}?"
           } else {
