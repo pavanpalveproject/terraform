@@ -47,6 +47,27 @@ pipeline {
       }
     }
 
+    stage('Terraform Init') {
+  steps {
+    script {
+      def envDir = ''
+      if (env.BRANCH_NAME.contains('dev')) {
+        envDir = 'dev'
+      } else if (env.BRANCH_NAME.contains('qa')) {
+        envDir = 'qa'
+      } else if (env.BRANCH_NAME.contains('prod')) {
+        envDir = 'prod'
+      }
+      if (envDir) {
+        dir("env/${envDir}") {
+          sh 'terraform init'
+        }
+      }
+    }
+  }
+}
+
+
     stage('Terraform Plan') {
       steps {
         script {
