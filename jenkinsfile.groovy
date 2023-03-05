@@ -21,33 +21,33 @@ pipeline {
     //     }
     // }
 
+    // stage('Terraform Init') {
+    //   steps {
+    //     script {
+    //       if (env.BRANCH_NAME.contains('dev')) {
+    //         dir('env/dev') {
+    //           sh "pwd"
+    //           sh 'terraform init'
+    //         }
+    //       }
+    //       if (env.BRANCH_NAME.contains("qa")) {
+    //         dir('env/qa') {
+    //           sh "pwd"
+    //           sh 'terraform init'
+    //         }
+    //       }
+    //       if (env.BRANCH_NAME.contains("prod")) {
+    //         dir('env/prod') {
+    //           sh "pwd"
+    //           sh 'terraform init'
+    //         }
+    //       }
+    //     }
+
+    //   }
+    // }
+
     stage('Terraform Init') {
-      steps {
-        script {
-          if (env.BRANCH_NAME.contains('dev')) {
-            dir('env/dev') {
-              sh "pwd"
-              sh 'terraform init'
-            }
-          }
-          if (env.BRANCH_NAME.contains("qa")) {
-            dir('env/qa') {
-              sh "pwd"
-              sh 'terraform init'
-            }
-          }
-          if (env.BRANCH_NAME.contains("prod")) {
-            dir('env/prod') {
-              sh "pwd"
-              sh 'terraform init'
-            }
-          }
-        }
-
-      }
-    }
-
-    stage('Terraform Init 1') {
   steps {
     script {
       def envDir = ''
@@ -71,26 +71,20 @@ pipeline {
     stage('Terraform Plan') {
       steps {
         script {
-          if (env.BRANCH_NAME.contains('dev')) {
-            dir('env/dev') {
-              sh "pwd"
-              sh 'terraform plan -out=terraform.plan'
-              // sh 'terraform apply'
-            }
-          }
-          if (env.BRANCH_NAME.contains("qa")) {
-            dir('env/qa') {
-              sh "pwd"
-              sh 'terraform plan -out=terraform.plan'
-            }
-          }
-          if (env.BRANCH_NAME.contains("prod")) {
-            dir('env/prod') {
-              sh "pwd"
-              sh 'terraform plan -out=terraform.plan'
-            }
-          }
+      def envDir = ''
+      if (env.BRANCH_NAME.contains('dev')) {
+        envDir = 'dev'
+      } else if (env.BRANCH_NAME.contains('qa')) {
+        envDir = 'qa'
+      } else if (env.BRANCH_NAME.contains('prod')) {
+        envDir = 'prod'
+      }
+      if (envDir) {
+        dir("env/${envDir}") {
+          sh 'terraform plan'
         }
+      }
+    }
 
       }
     }
@@ -99,6 +93,22 @@ pipeline {
         input message : 'are you sure to apply changes', ok: 'Approve'
       }
     }
+
+
+    stage('Approval_1') {
+      steps {
+        script {
+          // Replace this with your own approval mechanism
+          def approvedUser = 'johndoe'
+          if (approvedUser in env.CHANGE_AUTHOR_DISPLAY_NAME) {
+            input "Do you approve the changes for ${env.BRANCH_NAME}?"
+          } else {
+            error "${env.CHANGE_AUTHOR_DISPLAY_NAME} is not authorized to approve changes for ${env.BRANCH_NAME}"
+          }
+        }
+      }
+    }
+
 
     stage('Terraform Apply') {
       steps {
