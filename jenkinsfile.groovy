@@ -1,4 +1,4 @@
-def parts = BRANCH_NAME.readCSV('-')
+def parts = BRANCH_NAME.split('-')
 def grade = parts[0]
 def env = parts[1]
 def res = parts[2]
