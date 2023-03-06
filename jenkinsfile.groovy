@@ -15,6 +15,7 @@ pipeline {
         script{
         dir("${grade}/${env}/${res}") {
                 sh 'pwd'
+                sh 'ls'
         }
       }
       }
