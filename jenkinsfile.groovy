@@ -11,10 +11,12 @@ pipeline {
   }
   stages{
     stage('test'){
-      script{
+      steps{
+        script{
         dir("${grade}/${env}/${res}") {
                 sh 'terraform init'
         }
+      }
       }
     }
   }
