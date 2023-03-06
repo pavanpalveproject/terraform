@@ -14,7 +14,7 @@ pipeline {
       steps{
         script{
         dir("${grade}/${env}/${res}") {
-                sh 'terraform init'
+                sh 'pwd'
         }
       }
       }
