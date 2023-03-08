@@ -13,7 +13,7 @@
 # }
 
 module "compute_engine" {
-  source                    = "../../../modules"
+  source                    = "../../modules"
   project_id                = "o-media-2"
   name                      = var.name
   region                    = "us-central1"
