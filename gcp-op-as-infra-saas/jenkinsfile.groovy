@@ -40,7 +40,7 @@ pipeline {
         //         sh 'terraform init'
         //         sh 'terraform plan'
         
-         def changedDir = sh(script: "git --no-pager diff --name-only ${env.BRANCH_NAME}...master | awk -F/ '{print $1}' | uniq", returnStdout: true).trim()
+         def changedDir = sh(script: "git --no-pager diff --name-only ${env.BRANCH_NAME}...master | awk -F/ '{print }' | uniq", returnStdout: true).trim()
           sh "cd ${changedDir} && terraform init "
         }
       }
