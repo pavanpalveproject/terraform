@@ -11,6 +11,7 @@
 #   project     = "o-media-2"
 #   region      = "asia-south1"
 # }
+
 module "compute_engine" {
   source                    = "../../modules"
   project_id                = "o-media-2"
