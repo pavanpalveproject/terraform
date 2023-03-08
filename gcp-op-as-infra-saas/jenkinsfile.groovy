@@ -30,7 +30,9 @@ pipeline {
   environment {
     CLOUDSDK_CORE_PROJECT = 'o-media-2'
   }
-   stage('Checkout') {
+   
+  stages{
+    stage('Checkout') {
       steps {
         // Checkout the pull request branch
         script {
@@ -39,7 +41,6 @@ pipeline {
         }
       }
     }
-  stages{
     stage('terraform-init'){
       steps{
         script{
