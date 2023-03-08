@@ -36,7 +36,7 @@ pipeline {
       steps {
         // Checkout the pull request branch
         script {
-          def prBranch = env.BRANCH_NAME.replace('refs/heads/', '')
+          def prBranch = BRANCH_NAME.replace('refs/heads/', '')
           checkout([$class: 'GitSCM', branches: [[name: "refs/heads/${prBranch}"]], userRemoteConfigs: [[url: "https://github.com/pavanpalveproject/terraform"]]])
         }
       }
