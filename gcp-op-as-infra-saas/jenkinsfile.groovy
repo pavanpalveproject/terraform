@@ -41,7 +41,7 @@ pipeline {
         //         sh 'terraform plan'
         
          def changedDir = sh(script: "git --no-pager diff --name-only ${env.CHANGE_TARGET}...${env.CHANGE_ID} | awk -F/ '{print $1}' | uniq", returnStdout: true).trim()
-          sh "cd ${changedDir} && terraform init && terraform apply -auto-approve"
+          sh "cd ${changedDir} && terraform init "
         }
       }
       }
