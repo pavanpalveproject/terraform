@@ -13,7 +13,7 @@ pipeline {
     stage('test-terraform-init'){
       steps{
         script{
-        dir("${base_path}/${grade}/${env}/${res}") {
+        dir("${grade}/${env}/${res}") {
                 sh 'pwd'
                 sh 'ls'
                 sh 'terraform init'
