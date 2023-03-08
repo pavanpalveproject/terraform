@@ -30,6 +30,15 @@ pipeline {
   environment {
     CLOUDSDK_CORE_PROJECT = 'o-media-2'
   }
+   stage('Checkout') {
+      steps {
+        // Checkout the pull request branch
+        script {
+          def prBranch = env.CHANGE_BRANCH.replace('refs/heads/', '')
+          checkout([$class: 'GitSCM', branches: [[name: "refs/heads/${prBranch}"]], userRemoteConfigs: [[url: "https://github.com/pavanpalveproject/terraform"]]])
+        }
+      }
+    }
   stages{
     stage('terraform-init'){
       steps{
@@ -40,7 +49,7 @@ pipeline {
         //         sh 'terraform init'
         //         sh 'terraform plan'
         
-         def changedDir = sh(script: "git --no-pager diff --name-only ${env.BRANCH_NAME}...master | awk -F/ '{print }' | uniq", returnStdout: true).trim()
+         def changedDir = sh(script: "git --no-pager diff --name-only ${env.BRANCH_NAME}...master | awk -F/ '{print $1}' | uniq", returnStdout: true).trim()
           sh "cd ${changedDir} && terraform init "
         }
       }
