@@ -56,12 +56,12 @@ pipeline {
       }
     }
 
-    stage{
-        steps{
-          script{
-            git branch:
-          }
-        }
-    }
+    // stage{
+    //     steps{
+    //       script{
+    //         git branch:
+    //       }
+    //     }
+    // }
   }
   }
