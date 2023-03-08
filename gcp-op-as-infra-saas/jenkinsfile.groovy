@@ -31,21 +31,28 @@ pipeline {
     CLOUDSDK_CORE_PROJECT = 'o-media-2'
   }
   stages{
-    stage('test-terraform-init'){
+    stage('terraform-init'){
       steps{
         script{
-        dir("${base_path}/${env}/${res}") {
-                sh 'pwd'
-                sh 'ls'
-                sh 'terraform init'
-                sh 'terraform plan'
+        // dir("${base_path}/${env}/${res}") {
+        //         sh 'pwd'
+        //         sh 'ls'
+        //         sh 'terraform init'
+        //         sh 'terraform plan'
+        
+         def changedDir = sh(script: "git --no-pager diff --name-only ${env.CHANGE_TARGET}...${env.CHANGE_ID} | awk -F/ '{print $1}' | uniq", returnStdout: true).trim()
+          sh "cd ${changedDir} && terraform init && terraform apply -auto-approve"
         }
       }
       }
     }
 
-    // stage{
-
-    // }
+    stage{
+        steps{
+          script{
+            git branch:
+          }
+        }
+    }
   }
   }
