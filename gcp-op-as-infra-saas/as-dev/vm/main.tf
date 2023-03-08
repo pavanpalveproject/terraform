@@ -24,6 +24,7 @@ module "compute_engine" {
   disk_image                = "debian-cloud/debian-11"
 }
 
+
 # module "vpc_network"{
 
 #     source = "git::https://github.com/maniksde/TerraformModule.git"
